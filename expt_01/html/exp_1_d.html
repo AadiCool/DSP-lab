@@ -1,0 +1,194 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>exp_1_d</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-16"><meta name="DC.source" content="exp_1_d.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">Fs = 12e3;
+t = -1e-2:1/Fs:1e-2;
+
+F = 1e3;
+wave = [6 10]*cos(2*pi*[F 1.5*F]'.*t);
+interpol = upsample(wave, 2);
+
+lowpass_signal = lowpass(interpol, 6e3, 24e3);
+
+<span class="comment">%[z,p] = butter(2,0.5,'low');</span>
+<span class="comment">%[z,p] = cheby2(2,40,0.5,'low');</span>
+<span class="comment">%output = filter(z,p,interpol);</span>
+
+
+subplot(321);
+Y=abs(fftshift(fft(wave',256)))/256;
+df = Fs/length(Y);
+freqvec = -Fs/2:df:Fs/2-df;
+stem(freqvec,Y);
+xlabel(<span class="string">'Angular frequency'</span>);
+ylabel(<span class="string">'Amplitude- 256 point DFT'</span>);
+title(<span class="string">'DFT of signal with frequency 1kHz and 1.5kHz'</span>);
+
+subplot(322);
+plot(t,wave);
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(<span class="string">'Signal with frequency 1kHz and 1.5kHz'</span>);
+
+Fs = 24e3;
+t = -1e-2:1/Fs:1e-2;
+
+subplot(323);
+Y=abs(fftshift(fft(interpol',256)))/256;
+df = Fs/length(Y);
+freqvec = -Fs/2:df:Fs/2-df;
+stem(freqvec,Y);
+xlabel(<span class="string">'Angular frequency'</span>);
+ylabel(<span class="string">'Amplitude- 256 point DFT'</span>);
+title(<span class="string">'DFT of interpolated signal sampled at 24kHz'</span>);
+
+subplot(324);
+plot(t,interpol(2:end));
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(<span class="string">'Interpolated signal sampled at 24kHz'</span>);
+
+subplot(325);
+Y=abs(fftshift(fft(lowpass_signal',256)))/256;
+df = Fs/length(Y);
+freqvec = -Fs/2:df:Fs/2-df;
+stem(freqvec,Y);
+xlabel(<span class="string">'Angular frequency'</span>);
+ylabel(<span class="string">'Amplitude- 256 point DFT'</span>);
+title(<span class="string">'DFT of lowpass signal with cut-off 6kHz and sampled 24kHz'</span>);
+
+subplot(326);
+plot(t,lowpass_signal(2:end));
+xlabel(<span class="string">'Time'</span>);
+ylabel(<span class="string">'Amplitude'</span>);
+title(<span class="string">'Lowpass signal with cut-off 6kHz and sampled 24kHz'</span>);
+</pre><img vspace="5" hspace="5" src="exp_1_d_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+Fs = 12e3;
+t = -1e-2:1/Fs:1e-2;
+
+F = 1e3;
+wave = [6 10]*cos(2*pi*[F 1.5*F]'.*t);
+interpol = upsample(wave, 2);
+
+lowpass_signal = lowpass(interpol, 6e3, 24e3);
+
+%[z,p] = butter(2,0.5,'low');
+%[z,p] = cheby2(2,40,0.5,'low');
+%output = filter(z,p,interpol);
+
+
+subplot(321);
+Y=abs(fftshift(fft(wave',256)))/256;
+df = Fs/length(Y);
+freqvec = -Fs/2:df:Fs/2-df;
+stem(freqvec,Y);
+xlabel('Angular frequency');
+ylabel('Amplitude- 256 point DFT');
+title('DFT of signal with frequency 1kHz and 1.5kHz');
+
+subplot(322);
+plot(t,wave);
+xlabel('Time');
+ylabel('Amplitude');
+title('Signal with frequency 1kHz and 1.5kHz');
+
+Fs = 24e3;
+t = -1e-2:1/Fs:1e-2;
+
+subplot(323);
+Y=abs(fftshift(fft(interpol',256)))/256;
+df = Fs/length(Y);
+freqvec = -Fs/2:df:Fs/2-df;
+stem(freqvec,Y);
+xlabel('Angular frequency');
+ylabel('Amplitude- 256 point DFT');
+title('DFT of interpolated signal sampled at 24kHz');
+
+subplot(324);
+plot(t,interpol(2:end));
+xlabel('Time');
+ylabel('Amplitude');
+title('Interpolated signal sampled at 24kHz');
+
+subplot(325);
+Y=abs(fftshift(fft(lowpass_signal',256)))/256;
+df = Fs/length(Y);
+freqvec = -Fs/2:df:Fs/2-df;
+stem(freqvec,Y);
+xlabel('Angular frequency');
+ylabel('Amplitude- 256 point DFT');
+title('DFT of lowpass signal with cut-off 6kHz and sampled 24kHz');
+
+subplot(326);
+plot(t,lowpass_signal(2:end));
+xlabel('Time');
+ylabel('Amplitude');
+title('Lowpass signal with cut-off 6kHz and sampled 24kHz');
+##### SOURCE END #####
+--></body></html>
