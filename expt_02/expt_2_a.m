@@ -22,6 +22,7 @@ hn_hanning2 = hd.*hanningwind2;
 hn_blackmanwind = hd.*blackmanwind;
 
 n = x;
+w = -pi:.001:pi; 
 
 % rectangular window
 figure;

@@ -65,7 +65,8 @@ f = -1/2:1/1023:1/2;
 subplot(5,2,2);
 plot(f,y1_noise);
 title('filtered noisy signal rectangular');
-% snr(y1_noise);
+disp(['SNR rectangular is equal to ',num2str(snr(y1_noise, y1_noise-y1)),'.']);
+
 
 
 % triangular
@@ -82,7 +83,7 @@ f = -1/2:1/1023:1/2;
 subplot(5,2,4);
 plot(f,y1_noise);
 title('filtered noisy signal triangular');
-% snr(y1_noise);
+disp(['SNR triangular is equal to ',num2str(snr(y1_noise, y1_noise-y1)),'.']);
 
 
 % hanning
@@ -99,7 +100,7 @@ f = -1/2:1/1023:1/2;
 subplot(5,2,6);
 plot(f,y1_noise);
 title('filtered noisy signal hanning');
-% snr(y1_noise);
+disp(['SNR hanning is equal to ',num2str(snr(y1_noise, y1_noise-y1)),'.']);
 
 
 % hamming
@@ -116,7 +117,7 @@ f = -1/2:1/1023:1/2;
 subplot(5,2,8);
 plot(f,y1_noise);
 title('filtered noisy signal hamming');
-% snr(y1_noise);
+disp(['SNR hamming is equal to ',num2str(snr(y1_noise, y1_noise-y1)),'.']);
 
 
 % blackman
@@ -133,5 +134,5 @@ f = -1/2:1/1023:1/2;
 subplot(5,2,10);
 plot(f,y1_noise);
 title('filtered noisy signal blackman');
-% snr(y1_noise);
+disp(['SNR blackman is equal to ',num2str(snr(y1_noise, y1_noise-y1)),'.']);
 
