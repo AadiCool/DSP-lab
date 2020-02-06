@@ -26,7 +26,7 @@ subplot(2,2,4);
 plot(f,x1_noise);
 title('FFT of original signal with noise');
 
-disp(['SNR input is equal to ',num2str(snr(x_noise, x_noise-x)),'.']);
+disp(['SNR blackman is equal to ',num2str(snr(y1_noise, y1_noise-y1)),'.']);
 
 
 % plotting outputs
