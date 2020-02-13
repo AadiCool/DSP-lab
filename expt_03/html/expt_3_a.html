@@ -1,0 +1,211 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>expt_3_a</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-02-13"><meta name="DC.source" content="expt_3_a.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">num = input(<span class="string">"Enter a number "</span>, <span class="string">'s'</span>);
+num = strtrim(num);
+
+omega1 = 0; omega2 = 0;
+
+<span class="keyword">if</span>(num==<span class="string">'1'</span> || num==<span class="string">'2'</span> || num==<span class="string">'3'</span> || num==<span class="string">'A'</span>)
+    omega1=697;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(num==<span class="string">'4'</span> || num==<span class="string">'5'</span> || num==<span class="string">'6'</span> || num==<span class="string">'B'</span>)
+    omega1=770;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(num==<span class="string">'7'</span> || num==<span class="string">'8'</span> || num==<span class="string">'9'</span> || num==<span class="string">'C'</span>)
+    omega1=852;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(num==<span class="string">'*'</span> || num==<span class="string">'0'</span> || num==<span class="string">'#'</span> || num==<span class="string">'D'</span>)
+    omega1=941;
+<span class="keyword">end</span>
+
+<span class="keyword">if</span>(num==<span class="string">'1'</span> || num==<span class="string">'4'</span> || num==<span class="string">'7'</span> || num==<span class="string">'*'</span>)
+    omega2=1209;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(num==<span class="string">'2'</span> || num==<span class="string">'5'</span> || num==<span class="string">'8'</span> || num==<span class="string">'0'</span>)
+    omega2=1336;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(num==<span class="string">'3'</span> || num==<span class="string">'6'</span> || num==<span class="string">'9'</span> || num==<span class="string">'#'</span>)
+    omega2=1477;
+<span class="keyword">end</span>
+<span class="keyword">if</span>(num==<span class="string">'A'</span> || num==<span class="string">'B'</span> || num==<span class="string">'C'</span> || num==<span class="string">'D'</span>)
+    omega2=1633;
+<span class="keyword">end</span>
+
+t = linspace(0,1,8192);
+signal=cos(2*pi*omega1*t)+cos(2*pi*omega2*t);
+
+signal_fft = fftshift(abs(fft(signal,1024)));
+f = linspace(-1500, 1500, length(signal_fft));
+plot(f, signal_fft);
+
+row_freq = [697 770 852 941];
+col_freq = [1209 1336 1477 1633];
+
+i_row = 0; i_col = 0;
+x_row_max = 0;
+x_col_max = 0;
+
+<span class="comment">% t = 0 : 1000;</span>
+<span class="keyword">for</span> i = 1:4
+    h_row = cos(2*pi*row_freq(i)*t);
+    h_col = cos(2*pi*col_freq(i)*t);
+
+    x_row = rms(conv(h_row, signal));
+    x_col = rms(conv(h_col, signal));
+
+    <span class="keyword">if</span>(x_row &gt; x_row_max)
+        x_row_max = x_row;
+        i_row = i;
+    <span class="keyword">end</span>
+
+    <span class="keyword">if</span>(x_col &gt; x_col_max)
+        x_col_max = x_col;
+        i_col = i;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+disp([<span class="string">'i_row = '</span>, num2str(i_row), <span class="string">' i_col = '</span>, num2str(i_col)]);
+</pre><pre class="codeoutput error">Error using input
+Cannot call INPUT from EVALC.
+
+Error in expt_3_a (line 1)
+num = input("Enter a number ", 's');
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+num = input("Enter a number ", 's');
+num = strtrim(num);
+
+omega1 = 0; omega2 = 0;
+
+if(num=='1' || num=='2' || num=='3' || num=='A')
+    omega1=697;
+end
+if(num=='4' || num=='5' || num=='6' || num=='B')
+    omega1=770;
+end
+if(num=='7' || num=='8' || num=='9' || num=='C')
+    omega1=852;
+end
+if(num=='*' || num=='0' || num=='#' || num=='D')
+    omega1=941;
+end
+
+if(num=='1' || num=='4' || num=='7' || num=='*')
+    omega2=1209;
+end
+if(num=='2' || num=='5' || num=='8' || num=='0')
+    omega2=1336;
+end
+if(num=='3' || num=='6' || num=='9' || num=='#')
+    omega2=1477;
+end
+if(num=='A' || num=='B' || num=='C' || num=='D')
+    omega2=1633;
+end
+
+t = linspace(0,1,8192);
+signal=cos(2*pi*omega1*t)+cos(2*pi*omega2*t);
+
+signal_fft = fftshift(abs(fft(signal,1024)));
+f = linspace(-1500, 1500, length(signal_fft));
+plot(f, signal_fft);
+
+row_freq = [697 770 852 941];
+col_freq = [1209 1336 1477 1633];
+
+i_row = 0; i_col = 0;
+x_row_max = 0;
+x_col_max = 0;
+
+% t = 0 : 1000;
+for i = 1:4
+    h_row = cos(2*pi*row_freq(i)*t);
+    h_col = cos(2*pi*col_freq(i)*t);
+    
+    x_row = rms(conv(h_row, signal));
+    x_col = rms(conv(h_col, signal));
+    
+    if(x_row > x_row_max)
+        x_row_max = x_row;
+        i_row = i;
+    end
+    
+    if(x_col > x_col_max)
+        x_col_max = x_col;
+        i_col = i;
+    end
+end
+
+disp(['i_row = ', num2str(i_row), ' i_col = ', num2str(i_col)]);
+
+
+
+
+##### SOURCE END #####
+--></body></html>
